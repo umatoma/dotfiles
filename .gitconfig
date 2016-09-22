@@ -12,4 +12,4 @@
 	st = status
 	df = diff
 	cm = commit
-	delete-meged = git branch --merged | grep -vE '^\*|master$|develop$' | xargs -I % git branch -d %
+	delete-meged = "!f () { git checkout $1; git branch --merged|egrep -v '\\*|develop|master'|xargs git branch -d; };f"
