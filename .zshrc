@@ -1,9 +1,14 @@
 ########################################
 # 環境変数
 export LANG=ja_JP.UTF-8
+# nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
+# pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
+if which pyenv > /dev/null; then
+  eval "$(pyenv init -)";
+fi
 
 # 色を使用出来るようにする
 autoload -Uz colors
