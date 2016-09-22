@@ -1,0 +1,15 @@
+[core]
+	editor = vim
+	excludesfile = ~/.gitignore_global
+[merge]
+	tool = vimdiff
+[user]
+	name = umatoma
+	email = umatomakun@gmail.com
+[push]
+	default = current
+[alias]
+	st = status
+	df = diff
+	cm = commit
+	delete-meged = git branch --merged | grep -vE '^\*|master$|develop$' | xargs -I % git branch -d %
