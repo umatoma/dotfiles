@@ -1,6 +1,7 @@
 ########################################
 # 環境変数
 export LANG=ja_JP.UTF-8
+export PATH=$HOME/.nodebrew/current/bin:$PATH
 
 # 色を使用出来るようにする
 autoload -Uz colors
