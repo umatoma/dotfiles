@@ -6,7 +6,7 @@ export PATH=$HOME/.nodebrew/current/bin:$PATH
 # pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
-if which pyenv 2&>1 /dev/null; then
+if type pyenv >/dev/null 2>&1; then
   eval "$(pyenv init -)";
 fi
 
