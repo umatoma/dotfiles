@@ -9,6 +9,10 @@ export PATH="$PYENV_ROOT/bin:$PATH"
 if type pyenv >/dev/null 2>&1; then
   eval "$(pyenv init -)";
 fi
+# npm
+npmbin(){
+  [ $# -ne 0 ] && $(npm bin)/$*
+}
 
 # 色を使用出来るようにする
 autoload -Uz colors
