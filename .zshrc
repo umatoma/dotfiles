@@ -15,6 +15,7 @@ npmbin(){
 }
 
 # 色を使用出来るようにする
+export LSCOLORS=gxfxcxdxbxegedabagacag
 autoload -Uz colors
 colors
 
