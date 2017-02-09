@@ -22,7 +22,7 @@ npmbin(){
 }
 
 # Go
-export GOPATH=$HOME/.go
+export GOPATH=$HOME/go
 
 ########################################
 # Colors
