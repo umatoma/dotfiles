@@ -1,18 +1,31 @@
 ########################################
 # 環境変数
 export LANG=ja_JP.UTF-8
-# nodebrew
+
+########################################
+# Language
+
+# Python
+## nodebrew
 export PATH=$HOME/.nodebrew/current/bin:$PATH
-# pyenv
+## pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
 if type pyenv >/dev/null 2>&1; then
   eval "$(pyenv init -)";
 fi
-# npm
+
+# Node.js
+## npm
 npmbin(){
   [ $# -ne 0 ] && $(npm bin)/$*
 }
+
+# Go
+export GOPATH=$HOME/.go
+
+########################################
+# Colors
 
 # 色を使用出来るようにする
 export LSCOLORS=gxfxcxdxbxegedabagacag

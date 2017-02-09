@@ -2,7 +2,7 @@
 
 SOURCE_DIR=~/.dotfiles
 GIT_REPOSITORY=git@github.com:umatoma/dotfiles.git
-DOTFILES=(".gitconfig" ".gitignore_global" ".zshrc")
+DOTFILES=(".editorconfig" ".gitconfig" ".gitignore_global" ".vimrc" ".zshrc")
 
 echo '
       | |     | |  / _(_) |
