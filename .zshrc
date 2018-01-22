@@ -6,8 +6,6 @@ export LANG=ja_JP.UTF-8
 # Language
 
 # Python
-## nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH
 ## pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 export PATH="$PYENV_ROOT/bin:$PATH"
@@ -16,6 +14,9 @@ if type pyenv >/dev/null 2>&1; then
 fi
 
 # Node.js
+## nodebrew
+export PATH=$HOME/.nodebrew/current/bin:$PATH
+
 ## npm
 npmbin(){
   [ $# -ne 0 ] && $(npm bin)/$*
@@ -24,6 +25,11 @@ npmbin(){
 # Go
 export GOPATH=$HOME/go
 export PATH=$PATH:$GOPATH/bin
+
+# Android
+export ANDROID_HOME=$HOME/Library/Android/sdk
+export PATH=$PATH:$ANDROID_HOME/tools
+export PATH=$PATH:$ANDROID_HOME/platform-tools
 
 ########################################
 # Colors
@@ -175,3 +181,5 @@ case ${OSTYPE} in
 esac
 
 # vim:set ft=zsh:
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
