@@ -5,15 +5,10 @@
 ########################################
 # 環境変数
 export LANG=ja_JP.UTF-8
-export PATH=$PATH:~/Library/Android/sdk/platform-tools
-
 
 # 色を使用出来るようにする
 autoload -Uz colors
 colors
-
-# emacs 風キーバインドにする
-# bindkey -e
 
 # ヒストリの設定
 HISTFILE=~/.zsh_history
@@ -21,19 +16,27 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # プロンプト
-# 1行表示
-# PROMPT="%~ %# "
-# 2行表示
 PROMPT="%{${fg[green]}%}[%n]%{${reset_color}%} %~ # "
-
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
 select-word-style default
+
 # ここで指定した文字は単語区切りとみなされる
 # / も区切りと扱うので、^W でディレクトリ１つ分を削除できる
 zstyle ':zle:*' word-chars " /=;@:{},|"
 zstyle ':zle:*' word-style unspecified
+
+
+########################################
+# Custom
+# Android Studio
+export PATH="$PATH:~/Library/Android/sdk/platform-tools"
+
+# anyenv
+export PATH="$HOME/.anyenv/bin:$PATH"
+eval "$(anyenv init -)"
+
 
 ########################################
 # 補完
@@ -92,6 +95,7 @@ setopt auto_cd
 
 # cd したら自動的にpushdする
 setopt auto_pushd
+
 # 重複したディレクトリを追加しない
 setopt pushd_ignore_dups
 
