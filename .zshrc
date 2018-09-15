@@ -1,48 +1,30 @@
+# 少し凝った zshrc
+# License : MIT
+# http://mollifier.mit-license.org/
+
 ########################################
 # 環境変数
 export LANG=ja_JP.UTF-8
+export PATH=$PATH:~/Library/Android/sdk/platform-tools
 
-########################################
-# Language
-
-# Python
-## pyenv
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-if type pyenv >/dev/null 2>&1; then
-  eval "$(pyenv init -)";
-fi
-
-# Node.js
-## nodebrew
-export PATH=$HOME/.nodebrew/current/bin:$PATH
-
-## npm
-npmbin(){
-  [ $# -ne 0 ] && $(npm bin)/$*
-}
-
-# Go
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-
-# Android
-export ANDROID_HOME=$HOME/Library/Android/sdk
-export PATH=$PATH:$ANDROID_HOME/tools
-export PATH=$PATH:$ANDROID_HOME/platform-tools
-
-########################################
-# Colors
 
 # 色を使用出来るようにする
-export LSCOLORS=gxfxcxdxbxegedabagacag
 autoload -Uz colors
 colors
+
+# emacs 風キーバインドにする
+# bindkey -e
 
 # ヒストリの設定
 HISTFILE=~/.zsh_history
 HISTSIZE=1000000
 SAVEHIST=1000000
+
+# プロンプト
+# 1行表示
+# PROMPT="%~ %# "
+# 2行表示
+PROMPT="%{${fg[green]}%}[%n]%{${reset_color}%} %~ # "
 
 
 # 単語の区切り文字を指定する
@@ -57,8 +39,7 @@ zstyle ':zle:*' word-style unspecified
 # 補完
 # 補完機能を有効にする
 autoload -Uz compinit
-compinit -u
-setopt prompt_subst
+compinit
 
 # 補完で小文字でも大文字にマッチさせる
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
@@ -79,18 +60,14 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
 
-zstyle ':vcs_info:*' enable git
-zstyle ':vcs_info:git:*' formats ' %F{green}(%b)%f'
-zstyle ':vcs_info:git:*' actionformats ' %F{red}(%b|%a)%f'
-zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
+zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
 
 function _update_vcs_info_msg() {
     LANG=en_US.UTF-8 vcs_info
+    RPROMPT="${vcs_info_msg_0_}"
 }
 add-zsh-hook precmd _update_vcs_info_msg
-
-# プロンプト
-PROMPT='[%F{magenta}%m%f:%F{cyan}%~%f]${vcs_info_msg_0_} $ '
 
 
 ########################################
@@ -133,7 +110,6 @@ setopt hist_reduce_blanks
 # 高機能なワイルドカード展開を使用する
 setopt extended_glob
 
-
 ########################################
 # キーバインド
 
@@ -143,28 +119,14 @@ bindkey '^R' history-incremental-pattern-search-backward
 ########################################
 # エイリアス
 
-alias ll='ls -al'
+alias la='ls -a'
+alias ll='ls -l'
+
 alias rm='rm -i'
 alias cp='cp -i'
 alias mv='mv -i'
+
 alias mkdir='mkdir -p'
-alias grep='grep --color'
-alias sudo='sudo '
-
-# C で標準出力をクリップボードにコピーする
-# mollifier delta blog : http://mollifier.hatenablog.com/entry/20100317/p1
-if which pbcopy >/dev/null 2>&1 ; then
-    # Mac
-    alias -g C='| pbcopy'
-elif which xsel >/dev/null 2>&1 ; then
-    # Linux
-    alias -g C='| xsel --input --clipboard'
-elif which putclip >/dev/null 2>&1 ; then
-    # Cygwin
-    alias -g C='| putclip'
-fi
-
-
 
 ########################################
 # OS 別の設定
@@ -181,5 +143,3 @@ case ${OSTYPE} in
 esac
 
 # vim:set ft=zsh:
-export PATH="$HOME/.anyenv/bin:$PATH"
-eval "$(anyenv init -)"
