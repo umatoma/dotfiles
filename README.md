@@ -1,5 +1,3 @@
 dotfiles
 -----
-```bash
-$ make install
-```
+See Makefile.
