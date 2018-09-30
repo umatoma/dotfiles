@@ -16,7 +16,8 @@ HISTSIZE=1000000
 SAVEHIST=1000000
 
 # プロンプト
-PROMPT="%{${fg[green]}%}[%n]%{${reset_color}%} %~ # "
+# vcs_infoに記載あり
+# PROMPT="%{${fg[green]}%}[%n]%{${reset_color}%} %~ # "
 
 # 単語の区切り文字を指定する
 autoload -Uz select-word-style
@@ -63,12 +64,18 @@ zstyle ':completion:*:processes' command 'ps x -o pid,s,args'
 autoload -Uz vcs_info
 autoload -Uz add-zsh-hook
 
-zstyle ':vcs_info:*' formats '%F{green}(%s)-[%b]%f'
-zstyle ':vcs_info:*' actionformats '%F{red}(%s)-[%b|%a]%f'
+zstyle ':vcs_info:git:*' unstagedstr "*"
+zstyle ':vcs_info:git:*' check-for-changes true
+zstyle ':vcs_info:*' formats '%F{green}(%u%b)%f'
+zstyle ':vcs_info:*' actionformats '%F{red}(%b|%a)%f'
 
 function _update_vcs_info_msg() {
     LANG=en_US.UTF-8 vcs_info
-    RPROMPT="${vcs_info_msg_0_}"
+    if [[ -n "$vcs_info_msg_0_" ]]; then
+        PROMPT="[%n:%~] ${vcs_info_msg_0_} # "
+    else
+        PROMPT="[%n:%~] # "
+    fi
 }
 add-zsh-hook precmd _update_vcs_info_msg
 
@@ -123,8 +130,7 @@ bindkey '^R' history-incremental-pattern-search-backward
 ########################################
 # エイリアス
 
-alias la='ls -a'
-alias ll='ls -l'
+alias ll='ls -al'
 
 alias rm='rm -i'
 alias cp='cp -i'
